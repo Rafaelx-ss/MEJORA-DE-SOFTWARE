@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./servicios_styles.css">
+</head>
+<body>
+    <header>
+        <img src="../../../img/LogoLetras.png" alt="START BANK Logo" class="logo">
+        <h1 id="nombreUsuario"></h1>
+        <p><script>
+            var fechaActual = new Date(Date.now());
+            document.write(fechaActual.getDate() + '/' + (fechaActual.getMonth() + 1) + '/' + fechaActual.getFullYear());
+        </script></p>
+        
+    </header>
+    <h2 class="SubHeader">SERVICIOS</h2>
+    <p class="SubHeader">Seleccione una opción</p>
+
+
+    <div class="menu-pagos">
+        <div class="opcion-pago" id="cfe">
+            <img src="../../../img/CFE.png" alt="cfe" class="cfe">
+        </div>
+        <div class="opcion-pago" id="telmex">
+            <img src="../../../img/TELMEX.png" alt="telmex" class="telmex">
+        </div>
+        <div class="opcion-pago" id="japay">
+            <img src="../../../img/JAPAY.png" alt="japay" class="japay">
+        </div>
+        <div class="opcion-pago" id="totalplay">
+            <img src="../../../img/TOTALPLAY.png" alt="totalplay" class="totalplay">
+        </div>
+        <div class="opcion-pago" id="telcel">
+            <img src="../../../img/TELCEL.png" alt="telcel" class="telcel">
+        </div>
+    </div>
+
+    <footer>
+        <button class="exit-btn" id="back-btn">Regresar</button>
+        <button class="exit-btn" id="exit-btn">Volver al menú</button>
+    </footer>
+
+    <script src="servicios_script.js"></script>
+</body>
+</html>

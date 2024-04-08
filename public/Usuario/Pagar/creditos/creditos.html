@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./creditos_styles.css">
+</head>
+<body>
+    <header>
+        <img src="../../../img/LogoLetras.png" alt="START BANK Logo" class="logo">
+        <h1 id="nombreUsuario"></h1>
+        <p><script>
+            var fechaActual = new Date(Date.now());
+            document.write(fechaActual.getDate() + '/' + (fechaActual.getMonth() + 1) + '/' + fechaActual.getFullYear());
+        </script></p>
+        
+    </header>
+    <h2 class="SubHeader">CREDITOS Y PAGOS</h2>
+    <p class="SubHeader">Seleccione una opción</p>
+
+
+    <div class="menu-pagos">
+        <div class="opcion-pago" id="casa">
+            <p>Casa</p>
+            <img src="../../../img/Casa.png" alt="casa" class="casa">
+        </div>
+        <div class="opcion-pago" id="carro">
+            <p>Carro</p>
+            <img src="../../../img/carro.png" alt="carro" class="carro">
+        </div>
+        <div class="opcion-pago" id="colegiatura">
+            <p>Colegiatura</p>
+            <img src="../../../img/Colegiatura.png" alt="colegiatura" class="colegiatura">
+        </div>
+    </div>
+
+    <footer>
+        <button class="exit-btn" id="back-btn">Regresar</button>
+        <button class="exit-btn" id="exit-btn">Volver al menú</button>
+    </footer>
+
+    <script src="creditos_script.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./servicios_styles.css">
+</head>
+<body>
+    <header>
+        <img src="../../../img/LogoLetras.png" alt="START BANK Logo" class="logo">
+        <h1></h1>
+        <p><script>
+            var fechaActual = new Date(Date.now());
+            document.write(fechaActual.getDate() + '/' + (fechaActual.getMonth() + 1) + '/' + fechaActual.getFullYear());
+        </script></p>
+    </header>
+
+    <div class="contenedor">
+        <h2>Pago de servicio</h2>
+        <img src="" alt="imagenServicio" id="imagenServicio" class="imagenServicio">
+        <p>TITULAR DE LA CUENTA:</p>
+        <h2 id="nombreUsuario">.</h2>
+        <p>Monto a pagar:</p>
+        <h2 id="monto"></h2>
+    </div>
+
+    <footer>
+        <button class="exit-btn" id="back-btn">Regresar</button>
+        <button class="exit-btn" id="pagar">Pagar</button>
+        <button class="exit-btn" id="exit-btn">Volver al menú</button>
+    </footer>
+
+    <script src="./confirmarServicios.js"></script>
+
+</body>
+</html>

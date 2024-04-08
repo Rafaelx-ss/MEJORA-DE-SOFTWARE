@@ -1,0 +1,176 @@
+*{
+    font-family: 'Quicksand', sans-serif;
+}
+
+.container {
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+}
+body {
+    background-color: #D7FAFF;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+header {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    justify-content: space-around;
+    margin-bottom: -20px;
+}
+
+header h1{
+    margin-left: -50px;
+
+}
+
+.SubHeader{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    margin-top: -20px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    margin-top: -20px;
+    width: 10em; /* Ajustar si es necesario para pantallas más pequeñas */
+}
+
+.menu-pagos {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.opcion-pago{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 10em;
+    height: 10em;
+    background-color: #005374;
+    color: white;
+    border-radius: .5em;
+    padding: .9em;
+    margin: 1.5em;
+    border: 0;
+    align-items: center; /* Corregido de 'end' a 'center' */
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.opcion-pago:hover {
+    background-color: #0056b3;
+}
+
+.opcion-pago:focus, .opcion-pago:active {
+    outline: none;
+    border: .1em solid #0056b3;
+    background-color: #003366;
+}
+
+.opcion-pago h2{
+    font-size: large;
+    padding-top: 1em;
+    margin: 0;
+    border: 0;
+}
+
+.opcion-pago p{
+    font-size: small;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+.opcion-pago img{
+    height: 5em;
+    padding: 1em;
+    margin: 0;
+    border: 0;
+}
+
+.japay, .totalplay{
+    height: 8em !important;
+}
+
+.telcel{
+    height: 3.5em !important;
+}
+
+
+footer {
+    width: 100%;
+    margin-top: auto;
+    padding: 2em 0;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.exit-btn {
+    font-weight: bold;
+    font-size: large;
+    background-color: #00162D;
+    color: white;
+    padding: 1em 4em;
+    border: none;
+    border-radius: .5em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.exit-btn:hover {
+    background-color: #0056b3;
+}
+
+.exit-btn:focus, .exit-btn:active {
+    outline: none;
+    border: .1em solid #0056b3;
+    background-color: #003366;
+}
+
+.contenedor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: -70px;
+    width: 30%;
+    height: 50%;
+}
+
+.imagenServicio{
+    height: 4em;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+
+.contenedor *{
+    padding: .5em;
+    margin: 0;
+    border: 0;
+}
+
+
+

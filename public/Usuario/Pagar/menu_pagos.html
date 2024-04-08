@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="menu_pagos.css">
+</head>
+<body>
+    <header>
+        <img src="../../img/LogoLetras.png" alt="START BANK Logo" class="logo">
+        <h1 id="nombreUsuario"></h1>
+        <p><script>
+            var fechaActual = new Date(Date.now());
+            document.write(fechaActual.getDate() + '/' + (fechaActual.getMonth() + 1) + '/' + fechaActual.getFullYear());
+        </script></p>
+        
+    </header>
+    <h2 class="SubHeader">PAGAR</h2>
+    <p class="SubHeader">Seleccione una opción</p>
+
+
+    <div class="menu-pagos">
+        <div class="opcion-pago" id="servicios">
+            <img src="../../img/Servicios.png" alt="Servicios">
+            <h2>Servicios</h2>
+            <p>CFE, TotalPlay, Japay y mas</p>
+        </div>
+        <div class="opcion-pago" id="creditos">
+            <img src="../../img/Creditos.png" alt="Creditos">
+            <h2>Créditos y pagos</h2>
+            <p>Carro, hipoteca o colegiatura </p>
+        </div>
+        <div class="opcion-pago" id="tarjeta-credito">
+            <img src="../../img/TarjetaCredito.png" alt="TarjetaCredito">
+            <h2>Tarjeta de crédito</h2>
+            <p>Pague su tarjeta de credito</p>
+        </div>
+    </div>
+
+    <footer>
+        <button class="exit-btn" id="exit-btn">Volver al menú</button>
+    </footer>
+
+    <script src="menu_pagos.js"></script>
+</body>
+</html>

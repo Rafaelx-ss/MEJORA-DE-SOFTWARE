@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Inicio - START BANK</title>
+</head>
+<body>
+    <header>
+        <img src="../img/LogoLetras.png" alt="START BANK Logo" class="logo">
+        <h1 id="nombreUsuario"></h1>
+        <p><script>
+            var fechaActual = new Date(Date.now());
+            document.write(fechaActual.getDate() + '/' + (fechaActual.getMonth() + 1) + '/' + fechaActual.getFullYear());
+        </script></p>
+    </header>
+
+    <main>
+        <h1>Inicio</h1>
+        <H2>Seleccione una opción</H2>
+        <div class="options">
+            <button class="option Depositar" id="option-Depositar">
+                <img src="../img/DepositarLogo.png" alt="Depositar" class="icon">
+                <h3>Depositar</h3>
+            </button>
+            <button class="option Pagar" id="option-Pagar">
+                <img src="../img/PagarLogo.png" alt="Pagar" class="icon">
+                <h3>Pagar</h3>
+                <p>Servicios, Tarjeta y mas.</p>
+            </button>
+            <button class="option Retirar">
+                <img src="../img/RetirarLogo.png" alt="Retirar" class="icon">
+                <h3>Retirar</h3>
+                <p>Efectivo y operaciones.</p>
+            </button>
+        </div>
+    </main>
+
+    <footer>
+        <button class="exit-btn" id="exit-btn">Salir</button>
+    </footer>
+    <script src="menu_script.js"></script>
+</body>
+</html>
