@@ -124,3 +124,14 @@ footer {
     border: .1em solid #0056b3;
     background-color: #003366;
 }
+
+
+
+
+#exit-btn, #back-btn {
+    background-color: #770000;
+}
+
+#exit-btn:hover, #back-btn:hover {
+    background-color: #ff0000;
+}

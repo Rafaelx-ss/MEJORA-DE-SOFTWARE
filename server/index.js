@@ -91,8 +91,29 @@ app.post('/realizarPagoServicio', async (req, res) => {
             result = await sql.query`UPDATE clientesCuenta SET pagoColegiatura = 0 WHERE tarjetaDebito = ${tarjetaDebito}`;
         }
 
-        await sql.query`UPDATE clientesCuenta SET saldoTarjetaDebito = saldoTarjetaDebito - ${monto} WHERE tarjetaDebito = ${tarjetaDebito}`;
+        // Aquí asumimos que 'monto' es un número. Debes asegurarte de que el monto sea válido y positivo.
 
+        if (result.rowsAffected[0] > 0) {
+            res.json({ success: true });
+        } else {
+            // No se encontró la cuenta o no se pudo actualizar
+            res.json({ success: false, message: "No se pudo actualizar el saldo." });
+        }
+    } catch (err) {
+        console.error('Error en el servidor:', err); // Agregamos este registro
+        res.status(500).json({ success: false, message: 'Error al conectar con la base de datos' });
+    }
+});
+
+
+
+app.post('/realizarPagoMinimo', async (req, res) => {
+    try {
+        console.log('Body de la solicitud:', req.body); // Agregamos este registro
+        await sql.connect(sqlConfig);
+        const { tarjetaDebito, monto } = req.body;
+
+        let result = await sql.query`UPDATE clientesCuenta SET saldoTarjetaCredito = saldoTarjetaCredito - ${monto} WHERE tarjetaDebito = ${tarjetaDebito}`;
 
         // Aquí asumimos que 'monto' es un número. Debes asegurarte de que el monto sea válido y positivo.
 
@@ -107,3 +128,27 @@ app.post('/realizarPagoServicio', async (req, res) => {
         res.status(500).json({ success: false, message: 'Error al conectar con la base de datos' });
     }
 });
+
+
+app.post('/realizarPagoTotal', async (req, res) => {
+    try {
+        console.log('Body de la solicitud:', req.body); // Agregamos este registro
+        await sql.connect(sqlConfig);
+        const { tarjetaDebito } = req.body;
+
+        let result = await sql.query`UPDATE clientesCuenta SET saldoTarjetaCredito = 0 WHERE tarjetaDebito = ${tarjetaDebito}`;
+
+        // Aquí asumimos que 'monto' es un número. Debes asegurarte de que el monto sea válido y positivo.
+
+        if (result.rowsAffected[0] > 0) {
+            res.json({ success: true });
+        } else {
+            // No se encontró la cuenta o no se pudo actualizar
+            res.json({ success: false, message: "No se pudo actualizar el saldo." });
+        }
+    } catch (err) {
+        console.error('Error en el servidor:', err); // Agregamos este registro
+        res.status(500).json({ success: false, message: 'Error al conectar con la base de datos' });
+    }
+});
+

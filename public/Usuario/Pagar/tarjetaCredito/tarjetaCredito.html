@@ -4,8 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./tarjetaCredito_styles.css">
 </head>
 <body>
-    
+    <header>
+        <img src="../../../img/LogoLetras.png" alt="START BANK Logo" class="logo">
+        <h1></h1>
+        <p><script>
+            var fechaActual = new Date(Date.now());
+            document.write(fechaActual.getDate() + '/' + (fechaActual.getMonth() + 1) + '/' + fechaActual.getFullYear());
+        </script></p>
+    </header>
+
+    <div class="contenedor">
+        <h2>Pago de tarjeta de credito</h2>
+        <img src="../../../img/TarjetaCredito.png" alt="imagenServicio" id="imagenServicio" class="imagenServicio">
+        <p>TITULAR DE LA CUENTA:</p>
+        <h2 id="nombreUsuario">.</h2>
+        <p>Tarjeta:</p>
+        <h2 id="tarjeta"></h2>
+        <p>Saldo:</p>
+        <h2 id="monto"></h2>
+
+        <h2>Pago minimo: <span id="monto-minimo"></span></h2>
+        <h2>Pago para no generar intereses: <span id="monto-intereses"></span></h2>
+    </div>
+
+    <footer>
+        <button class="exit-btn" id="back-btn">Regresar</button>
+        <button class="exit-btn" id="pagar-minimo">Pagar monto minimo</button>
+        <button class="exit-btn" id="pagar-intereses">Pagar monto para no generar intereses</button>
+        <button class="exit-btn" id="pagar-total">Pagar monto total</button>
+        <button class="exit-btn" id="exit-btn">Volver al menú</button>
+    </footer>
+
+    <script src="./tarjetaCredito_script.js"></script>
+
 </body>
 </html>

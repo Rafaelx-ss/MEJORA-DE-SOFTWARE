@@ -125,3 +125,14 @@ footer {
         margin-bottom: 1em;
     }
 }
+
+
+
+
+#exit-btn, #back-btn {
+    background-color: #770000;
+}
+
+#exit-btn:hover, #back-btn:hover {
+    background-color: #ff0000;
+}

@@ -65,3 +65,11 @@ button:active {
     transform: scale(0.98);
 }
 
+
+#exit-btn, #back-btn {
+    background-color: #770000;
+}
+
+#exit-btn:hover, #back-btn:hover {
+    background-color: #ff0000;
+}
