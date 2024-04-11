@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos del Deposito - START BANK</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="../../../img/LogoLetras.png" alt="START BANK Logo" class="logo">
+            <H1></H1>
+            <p><script>
+                var fechaActual = new Date(Date.now());
+                document.write(fechaActual.getDate() + '/' + (fechaActual.getMonth() + 1) + '/' + fechaActual.getFullYear());
+            </script></p>
+        </header>
+        
+        <main class="deposit-info">
+            <h1>Datos del retiro</h1>
+            <div class="account-info">
+                <p class="text">NÚMERO DE CUENTA</p>
+                <p class="account-number" id="account-number"></p>
+                <p class="text">TITULAR DE LA CUENTA</p>
+                <p class="account-owner" id="account-owner"></p>
+            </div>
+
+            <div class="datos">
+                <p>Monto</p>
+                <p class="account-number" id="monto"></p>
+            </div>
+
+
+
+            <div class="actions">
+                <button type="button" class="back-btn" id="back-btn">Volver</button>
+                <button for="amount" type="submit" class="continue-btn" id="continue-btn">Confirmar</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="confirmar_script.js"></script>
+
+</body>
+</html>

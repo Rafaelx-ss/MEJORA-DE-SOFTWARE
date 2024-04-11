@@ -94,6 +94,18 @@ document.getElementById('pagar').addEventListener('click', async function() {
             const reciboMensaje = `Comprobante de Pago:\n\nTitular: ${nombres}\nNúmero de Tarjeta: ${tarjetaDebito}\nServicio pagado: ${optionPagoServicio}\nMonto pagado: $${monto}\n\nCualquier aclaración, consulte a su Rafita mas cercano.`;
             
             alert(reciboMensaje);
+
+            //const tarjetaDebito = usuarioDatos.tarjetaDebito;
+            const respuesta = await fetch('/verifyUser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ tarjetaDebito }),
+            });
+            const datos = await respuesta.json();
+            localStorage.setItem('usuarioDatos', JSON.stringify(datos.result[0]));
+
             window.location.href = '../menu_pagos.html';
         } else {
             alert('No se pudo realizar el depósito. Por favor, inténtelo de nuevo.');

@@ -10,11 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Asegúrate de que 'monto' y 'motivo' sean las claves correctas dentro del objeto 'datos'
     document.getElementById('monto').textContent = `$ ${datos.monto}`;
-    document.getElementById('motivo2').textContent = `${datos.motivo}`;
 });
 
 document.getElementById('back-btn').addEventListener('click', function() {
-    window.location.href = '../menu_principal.html';
+    window.location.href = './Monto.html';
 });
 
 
@@ -23,12 +22,11 @@ document.getElementById('continue-btn').addEventListener('click', async function
     const usuarioDatos = JSON.parse(localStorage.getItem('usuarioDatos'));
 
     const monto = transaccion.monto;
-    const motivo = transaccion.motivo; // Asegúrate de tener el motivo en la transacción
     const tarjetaDebito = usuarioDatos.tarjetaDebito;
     const nombres = usuarioDatos.nombres + " " + usuarioDatos.apellidoPaterno + " " + usuarioDatos.apellidoMaterno;
 
     try {
-        const response = await fetch('/realizarDeposito', {
+        const response = await fetch('/realizarRetiro', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -43,7 +41,7 @@ document.getElementById('continue-btn').addEventListener('click', async function
         const data = await response.json();
         if (data.success) {
             // Construir el mensaje del recibo
-            const reciboMensaje = `Comprobante de Depósito:\n\nTitular de la Cuenta: ${nombres}\nNúmero de Tarjeta: ${tarjetaDebito}\nMonto Depositado: $${monto}\nMotivo: ${motivo}\n\nCualquier aclaración, consulte a su Rafita mas cercano.`;
+            const reciboMensaje = `Comprobante de Depósito:\n\nTitular de la Cuenta: ${nombres}\nNúmero de Tarjeta: ${tarjetaDebito}\nMonto del retiro: $${monto}\n\nCualquier aclaración, consulte a su Rafita mas cercano.`;
             
             alert(reciboMensaje);
 
@@ -58,7 +56,7 @@ document.getElementById('continue-btn').addEventListener('click', async function
             const datos = await respuesta.json();
             localStorage.setItem('usuarioDatos', JSON.stringify(datos.result[0]));
             
-            window.location.href = '../menu_principal.html';
+            window.location.href = '../../menu_principal.html';
         } else {
             alert('No se pudo realizar el depósito. Por favor, inténtelo de nuevo.');
         }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./menu_retirar.css">
+</head>
+<body>
+    <header>
+        <img src="../../img/LogoLetras.png" alt="START BANK Logo" class="logo">
+        <h1 id="nombreUsuario"></h1>
+        <p><script>
+            var fechaActual = new Date(Date.now());
+            document.write(fechaActual.getDate() + '/' + (fechaActual.getMonth() + 1) + '/' + fechaActual.getFullYear());
+        </script></p>
+        
+    </header>
+    <h2 class="SubHeader">Retirar</h2>
+    <p class="SubHeader">Seleccione una opción</p>
+
+
+    <div class="menu-pagos">
+        <div class="opcion-pago" id="movimientos">
+            <img src="../../img/Movimientos.png" alt="Servicios">
+            <h2>Movimientos</h2>
+        </div>
+        <div class="opcion-pago" id="retirar-efectivo">
+            <img src="../../img/Retirar.png" alt="Creditos">
+            <h2>Retirar Efectivo</h2>
+        </div>
+        <div class="opcion-pago" id="NIP">
+            <img src="../../img/NIP.png" alt="TarjetaCredito">
+            <h2>Cambiar NIP</h2>
+        </div>
+    </div>
+
+    <footer>
+        <button class="exit-btn" id="exit-btn">Volver al menú</button>
+    </footer>
+
+    <script src="./menu_retirar.js"></script>
+</body>
+</html>

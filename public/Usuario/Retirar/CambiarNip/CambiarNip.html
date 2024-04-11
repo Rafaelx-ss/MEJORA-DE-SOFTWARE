@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./CambiarNip_styles.css">
+</head>
+<body>
+    <header>
+        <img src="../../../img/LogoLetras.png" alt="START BANK Logo" class="logo">
+        <h1></h1>
+        <p><script>
+            var fechaActual = new Date(Date.now());
+            document.write(fechaActual.getDate() + '/' + (fechaActual.getMonth() + 1) + '/' + fechaActual.getFullYear());
+        </script></p>
+    </header>
+
+    <div class="contenedor">
+        <p>TITULAR DE LA CUENTA:</p>
+        <h2 id="nombreUsuario">.</h2>
+        <p>Cuenta:</p>
+        <h2 id="tarjeta"></h2>
+        <p>Por favor, recuerde su PIN al momento de cambiarlo</p>
+        <h2>Ingrese su nuevo PIN</h2>
+
+        <form class="nip" id="nip-form"> <!-- Agrega un ID al formulario -->
+            <input type="number" id="nip" placeholder="1234" required maxlength="4">
+        </form>
+        
+        
+    </div>
+
+    <footer>
+        
+        <button class="exit-btn" id="back-btn">Regresar</button>
+        <button type="button" class="exit-btn" id="continuar">Continuar</button> 
+        <button class="exit-btn" id="exit-btn">Volver al menú</button>
+    </footer>
+
+    <script src="./CambiarNip_script.js"></script>
+
+</body>
+</html>

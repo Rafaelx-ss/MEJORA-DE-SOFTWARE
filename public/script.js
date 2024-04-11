@@ -16,9 +16,23 @@ document.getElementById('userForm').addEventListener('submit', async function(e)
         if (data.exists) {
             // Guardar los datos del usuario en localStorage
             localStorage.setItem('usuarioDatos', JSON.stringify(data.result[0])); // Asumiendo que 'data.result[0]' contiene los datos del usuario
-            window.location.replace('./Usuario/menu_principal.html');
+            
+            const usuarioDatos = JSON.parse(localStorage.getItem('usuarioDatos'));
 
-            console.log(usuarioDatos);
+
+            let NIP = prompt("Ingese su NIP");
+
+            if (NIP == usuarioDatos.pinTarjeta) {
+                window.location.replace('./Usuario/menu_principal.html');
+
+                console.log(usuarioDatos);
+                
+            }else{
+                alert("NIP INCORRECTO.")
+                window.location.reload();
+            }
+
+
         } else {
             alert('El usuario no existe.');
         }

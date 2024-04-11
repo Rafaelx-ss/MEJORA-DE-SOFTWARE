@@ -10,21 +10,25 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
 document.getElementById('exit-btn').addEventListener('click', function() {
-    window.location.href = '../index.html';
+    window.location.href = '../menu_principal.html';
 });
 
 
-document.getElementById('option-Depositar').addEventListener('click', function() {
-    window.location.href = './Depositos/Monto.html';
+document.getElementById('movimientos').addEventListener('click', function() {
+    window.location.href = '../menu_principal.html';
 });
 
-document.getElementById('option-Pagar').addEventListener('click', function() {
-    window.location.href = './Pagar/menu_pagos.html';
+document.getElementById('retirar-efectivo').addEventListener('click', function() {
+    window.location.href = './RetirarEfectivo/Monto.html';
+});
+
+document.getElementById('NIP').addEventListener('click',function() {
+    window.location.href = './CambiarNip/CambiarNip.html';
+});
+
+document.getElementById('tarjeta-credito').addEventListener('click', function() {
+    window.location.href = './tarjetaCredito/tarjetaCredito.html'
 });
 
 
-document.getElementById('option-Retirar').addEventListener('click', function() {
-    window.location.href = './Retirar/menu_retirar.html';
-});

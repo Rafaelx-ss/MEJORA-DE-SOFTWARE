@@ -33,6 +33,11 @@ document.getElementById('pagar-minimo').addEventListener('click', async function
     const usuarioDatos = JSON.parse(localStorage.getItem('usuarioDatos'));
     const nombres = `${usuarioDatos.nombres} ${usuarioDatos.apellidoPaterno} ${usuarioDatos.apellidoMaterno}`
     const tarjetaDebito = usuarioDatos.tarjetaDebito;
+    let saldoTarjetaCredito = 1.10;
+    saldoTarjetaCredito = usuarioDatos.saldoTarjetaCredito;
+    let montoMinimo = 1.10;
+    montoMinimo = saldoTarjetaCredito * 0.05;
+
     try {
         const response = await fetch('/realizarPagoMinimo', {
             method: 'POST',
@@ -52,6 +57,18 @@ document.getElementById('pagar-minimo').addEventListener('click', async function
             const reciboMensaje = `Comprobante de Pago:\n\nTitular: ${nombres}\nOrigen de pago: ${tarjetaDebito}\nPago de tarjeta de credito. \nMonto pagado: $${montoMinimo}\n\n\nCualquier aclaración, consulte a su Rafita mas cercano.`;
             
             alert(reciboMensaje);
+
+            //const tarjetaDebito = usuarioDatos.tarjetaDebito;
+            const respuesta = await fetch('/verifyUser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ tarjetaDebito }),
+            });
+            const datos = await respuesta.json();
+            localStorage.setItem('usuarioDatos', JSON.stringify(datos.result[0]));
+
             window.location.href = '../menu_pagos.html';
         } else {
             alert('No se pudo realizar el depósito. Por favor, inténtelo de nuevo.');
@@ -67,8 +84,11 @@ document.getElementById('pagar-intereses').addEventListener('click', async funct
     const usuarioDatos = JSON.parse(localStorage.getItem('usuarioDatos'));
     const nombres = `${usuarioDatos.nombres} ${usuarioDatos.apellidoPaterno} ${usuarioDatos.apellidoMaterno}`
     const tarjetaDebito = usuarioDatos.tarjetaDebito;
+    const saldoTarjetaCredito = usuarioDatos.saldoTarjetaCredito;
+    const montoIntereses = saldoTarjetaCredito * 0.7;
+
     try {
-        const response = await fetch('/realizarPagoMinimo', {
+        const response = await fetch('/realizarPagoIntereses', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -86,6 +106,19 @@ document.getElementById('pagar-intereses').addEventListener('click', async funct
             const reciboMensaje = `Comprobante de Pago:\n\nTitular: ${nombres}\nOrigen de pago: ${tarjetaDebito}\nPago de tarjeta de credito. \nMonto pagado: $${montoIntereses}\n\n\nCualquier aclaración, consulte a su Rafita mas cercano.`;
             
             alert(reciboMensaje);
+
+            //const tarjetaDebito = usuarioDatos.tarjetaDebito;
+            const respuesta = await fetch('/verifyUser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ tarjetaDebito }),
+            });
+            const datos = await respuesta.json();
+            localStorage.setItem('usuarioDatos', JSON.stringify(datos.result[0]));
+
+
             window.location.href = '../menu_pagos.html';
         } else {
             alert('No se pudo realizar el depósito. Por favor, inténtelo de nuevo.');
@@ -121,6 +154,17 @@ document.getElementById('pagar-total').addEventListener('click', async function(
             const reciboMensaje = `Comprobante de Pago:\n\nTitular: ${nombres}\nOrigen de pago: ${tarjetaDebito}\nPago de tarjeta de credito. \nMonto pagado: $${monto}\n\n\nCualquier aclaración, consulte a su Rafita mas cercano.`;
             
             alert(reciboMensaje);
+
+            //const tarjetaDebito = usuarioDatos.tarjetaDebito;
+            const respuesta = await fetch('/verifyUser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ tarjetaDebito }),
+            });
+            const datos = await respuesta.json();
+            localStorage.setItem('usuarioDatos', JSON.stringify(datos.result[0]));
 
             window.location.href = '../menu_pagos.html';
         } else {

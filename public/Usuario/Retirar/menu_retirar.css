@@ -1,0 +1,137 @@
+*{
+    font-family: 'Quicksand', sans-serif;
+}
+
+body {
+    background-color: #D7FAFF;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    justify-content: space-around;
+    margin-bottom: -20px;
+}
+
+header h1{
+    margin-left: -50px;
+
+}
+
+.SubHeader{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    margin-top: -20px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    margin-top: -20px;
+    width: 10em; /* Ajustar si es necesario para pantallas más pequeñas */
+}
+
+.menu-pagos {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.opcion-pago{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    width: 13em;
+    background-color: #005374;
+    color: white;
+    border-radius: .5em;
+    padding: .9em;
+    margin: 1.5em;
+    border: 0;
+    align-items: center; /* Corregido de 'end' a 'center' */
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.opcion-pago:hover {
+    background-color: #0056b3;
+}
+
+.opcion-pago:focus, .opcion-pago:active {
+    outline: none;
+    border: .1em solid #0056b3;
+    background-color: #003366;
+}
+
+.opcion-pago h2{
+    font-size: large;
+    padding-top: 1em;
+    margin: 0;
+    border: 0;
+}
+
+.opcion-pago p{
+    font-size: small;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+.opcion-pago img{
+    height: 10em;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+footer {
+    margin-top: auto; /* Ajustado para colocar el footer en la parte inferior */
+    padding: 2em 0;
+    text-align: center;
+}
+
+.exit-btn {
+    font-weight: bold;
+    font-size: large;
+    background-color: #00162D;
+    color: white;
+    padding: 1em 4em;
+    border: none;
+    border-radius: .5em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.exit-btn:hover {
+    background-color: #0056b3;
+}
+
+.exit-btn:focus, .exit-btn:active {
+    outline: none;
+    border: .1em solid #0056b3;
+    background-color: #003366;
+}
+
+
+
+
+#exit-btn, #back-btn {
+    background-color: #770000;
+}
+
+#exit-btn:hover, #back-btn:hover {
+    background-color: #ff0000;
+}
