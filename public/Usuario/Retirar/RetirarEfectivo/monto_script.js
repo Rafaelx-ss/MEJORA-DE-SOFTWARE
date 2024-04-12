@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Leer los datos del usuario guardados
     const usuarioDatos = JSON.parse(localStorage.getItem('usuarioDatos'));
     document.getElementById('account-owner').textContent = `${usuarioDatos.nombres} ${usuarioDatos.apellidoPaterno} ${usuarioDatos.apellidoMaterno}`;
     document.getElementById('account-number').textContent = `${usuarioDatos.tarjetaDebito}`;
@@ -24,7 +23,6 @@ document.getElementById('continue-btn').addEventListener('click', async function
     var monto = document.getElementById('amount').value;
     var billetes20 = Math.floor(usuarioDatos.saldoTarjetaDebito / 50);
     var valor = billetes20 * 50;
-    // Convertir monto a número y verificar si es válido
     if (monto && esMontoValido(Number(monto))) {
 
         if (monto > 9000) {

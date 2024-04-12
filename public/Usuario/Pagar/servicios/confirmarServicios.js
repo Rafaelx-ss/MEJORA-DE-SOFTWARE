@@ -90,12 +90,10 @@ document.getElementById('pagar').addEventListener('click', async function() {
 
         const data = await response.json();
         if (data.success) {
-            // Construir el mensaje del recibo
             const reciboMensaje = `Comprobante de Pago:\n\nTitular: ${nombres}\nNúmero de Tarjeta: ${tarjetaDebito}\nServicio pagado: ${optionPagoServicio}\nMonto pagado: $${monto}\n\nCualquier aclaración, consulte a su Rafita mas cercano.`;
             
             alert(reciboMensaje);
 
-            //const tarjetaDebito = usuarioDatos.tarjetaDebito;
             const respuesta = await fetch('/verifyUser', {
                 method: 'POST',
                 headers: {
@@ -150,7 +148,7 @@ document.getElementById('pagar').addEventListener('click', async function() {
             alert('No se pudo realizar el depósito. Por favor, inténtelo de nuevo.');
         }
     } catch (error) {
-        console.error('Error en la solicitud:', error); // Agregamos este registro
+        console.error('Error en la solicitud:', error); 
         alert('Error al conectar con el servidor.');
     }
 });

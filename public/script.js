@@ -14,8 +14,7 @@ document.getElementById('userForm').addEventListener('submit', async function(e)
 
         const data = await response.json();
         if (data.exists) {
-            // Guardar los datos del usuario en localStorage
-            localStorage.setItem('usuarioDatos', JSON.stringify(data.result[0])); // Asumiendo que 'data.result[0]' contiene los datos del usuario
+            localStorage.setItem('usuarioDatos', JSON.stringify(data.result[0]));
             
             const usuarioDatos = JSON.parse(localStorage.getItem('usuarioDatos'));
 

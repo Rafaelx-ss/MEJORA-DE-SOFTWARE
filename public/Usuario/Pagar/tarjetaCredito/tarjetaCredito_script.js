@@ -8,11 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('monto').textContent = `$${usuarioDatos.saldoTarjetaCredito}`;
     const saldoTarjetaCredito = usuarioDatos.saldoTarjetaCredito;
 
-    // Calcular los montos con dos decimales
     const montoMinimo = (saldoTarjetaCredito * 0.05).toFixed(2);
     const montoIntereses = (saldoTarjetaCredito * 0.7).toFixed(2);
 
-    // Asignar los montos a los elementos HTML
     document.getElementById('monto-minimo').textContent = `$${montoMinimo}`;
     document.getElementById('monto-intereses').textContent = `$${montoIntereses}`;
 
@@ -54,12 +52,10 @@ document.getElementById('pagar-minimo').addEventListener('click', async function
 
         const data = await response.json();
         if (data.success) {
-            // Construir el mensaje del recibo
             const reciboMensaje = `Comprobante de Pago:\n\nTitular: ${nombres}\nOrigen de pago: ${tarjetaDebito}\nPago de tarjeta de credito. \nMonto pagado: $${montoMinimo}\n\n\nCualquier aclaración, consulte a su Rafita mas cercano.`;
             
             alert(reciboMensaje);
 
-            //const tarjetaDebito = usuarioDatos.tarjetaDebito;
             const respuesta = await fetch('/verifyUser', {
                 method: 'POST',
                 headers: {
@@ -114,7 +110,7 @@ document.getElementById('pagar-minimo').addEventListener('click', async function
             alert('No se pudo realizar el depósito. Por favor, inténtelo de nuevo.');
         }
     } catch (error) {
-        console.error('Error en la solicitud:', error); // Agregamos este registro
+        console.error('Error en la solicitud:', error);
         alert('Error al conectar con el servidor.');
     }
 });
@@ -142,12 +138,10 @@ document.getElementById('pagar-intereses').addEventListener('click', async funct
 
         const data = await response.json();
         if (data.success) {
-            // Construir el mensaje del recibo
             const reciboMensaje = `Comprobante de Pago:\n\nTitular: ${nombres}\nOrigen de pago: ${tarjetaDebito}\nPago de tarjeta de credito. \nMonto pagado: $${montoIntereses}\n\n\nCualquier aclaración, consulte a su Rafita mas cercano.`;
             
             alert(reciboMensaje);
 
-            //const tarjetaDebito = usuarioDatos.tarjetaDebito;
             const respuesta = await fetch('/verifyUser', {
                 method: 'POST',
                 headers: {
@@ -201,7 +195,7 @@ document.getElementById('pagar-intereses').addEventListener('click', async funct
             alert('No se pudo realizar el depósito. Por favor, inténtelo de nuevo.');
         }
     } catch (error) {
-        console.error('Error en la solicitud:', error); // Agregamos este registro
+        console.error('Error en la solicitud:', error);
         alert('Error al conectar con el servidor.');
     }
 });
@@ -227,12 +221,10 @@ document.getElementById('pagar-total').addEventListener('click', async function(
 
         const data = await response.json();
         if (data.success) {
-            // Construir el mensaje del recibo
             const reciboMensaje = `Comprobante de Pago:\n\nTitular: ${nombres}\nOrigen de pago: ${tarjetaDebito}\nPago de tarjeta de credito. \nMonto pagado: $${monto}\n\n\nCualquier aclaración, consulte a su Rafita mas cercano.`;
             
             alert(reciboMensaje);
 
-            //const tarjetaDebito = usuarioDatos.tarjetaDebito;
             const respuesta = await fetch('/verifyUser', {
                 method: 'POST',
                 headers: {
@@ -283,7 +275,7 @@ document.getElementById('pagar-total').addEventListener('click', async function(
             alert('No se pudo realizar el depósito. Por favor, inténtelo de nuevo.');
         }
     } catch (error) {
-        console.error('Error en la solicitud:', error); // Agregamos este registro
+        console.error('Error en la solicitud:', error);
         alert('Error al conectar con el servidor.');
     }
 

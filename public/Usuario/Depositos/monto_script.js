@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Leer los datos del usuario guardados
     const usuarioDatos = JSON.parse(localStorage.getItem('usuarioDatos'));
 
-    // Ejemplo: Actualizar el DOM con el nombre del usuario
-    // Asegúrate de tener un elemento con id='nombreUsuario' en tu HTML
     document.getElementById('account-owner').textContent = `${usuarioDatos.nombres} ${usuarioDatos.apellidoPaterno} ${usuarioDatos.apellidoMaterno}`;
     document.getElementById('account-number').textContent = `${usuarioDatos.tarjetaDebito}`;
 
@@ -17,7 +14,6 @@ document.getElementById('continue-btn').addEventListener('click', async function
     var monto = document.getElementById('amount').value;
     var motivo = document.getElementById('Motivo').value;
 
-    // Convertir monto a número y verificar si es válido
     if (monto && motivo && esMontoValido(Number(monto))) {
         localStorage.setItem('transaccion', JSON.stringify({ monto, motivo }));
         window.location.href = './confirmar.html';
