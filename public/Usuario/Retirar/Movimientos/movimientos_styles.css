@@ -2,11 +2,7 @@
     font-family: 'Quicksand', sans-serif;
 }
 
-.container {
-    width: 80%;
-    max-width: 500px;
-    text-align: center;
-}
+
 body {
     background-color: #D7FAFF;
     margin: 0;
@@ -55,62 +51,6 @@ header h1{
     
 }
 
-.opcion-pago{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 10em;
-    height: 10em;
-    background-color: #005374;
-    color: white;
-    border-radius: .5em;
-    padding: .9em;
-    margin: 1.5em;
-    border: 0;
-    align-items: center; /* Corregido de 'end' a 'center' */
-    transition: background-color 0.3s;
-    cursor: pointer;
-}
-
-.opcion-pago:hover {
-    background-color: #0056b3;
-}
-
-.opcion-pago:focus, .opcion-pago:active {
-    outline: none;
-    border: .1em solid #0056b3;
-    background-color: #003366;
-}
-
-.opcion-pago h2{
-    font-size: large;
-    padding-top: 1em;
-    margin: 0;
-    border: 0;
-}
-
-.opcion-pago p{
-    font-size: small;
-    padding: 0;
-    margin: 0;
-    border: 0;
-}
-
-.opcion-pago img{
-    height: 8.5em;
-    padding: 1em;
-    margin: 0;
-    border: 0;
-}
-
-.japay, .totalplay{
-    height: 8em !important;
-}
-
-.telcel{
-    height: 3.5em !important;
-}
 
 
 footer {
@@ -144,36 +84,6 @@ footer {
     background-color: #003366;
 }
 
-.contenedor{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #D9D9D9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-top: -70px;
-    width: 30%;
-    height: 55%;
-}
-
-.imagenServicio{
-    height: 4em;
-    padding: 0;
-    margin: 0;
-    border: 0;
-}
-
-
-.contenedor *{
-    padding: .5em;
-    margin: 0;
-    border: 0;
-}
-
-
-
 
 #exit-btn, #back-btn {
     background-color: #770000;
@@ -181,4 +91,43 @@ footer {
 
 #exit-btn:hover, #back-btn:hover {
     background-color: #ff0000;
+}
+
+
+.contenedor {
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.headCon {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.movimiento {
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 13px;
+}
+
+.movimiento p {
+    margin: 10px;
+    flex: 1;
+    text-align: center;
+}
+
+.monto {
+    color: red;
+    font-weight: bold;
 }

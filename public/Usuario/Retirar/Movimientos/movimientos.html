@@ -1,38 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./creditos_styles.css">
+    <link rel="stylesheet" href="./movimientos_styles.css">
 </head>
 <body>
     <header>
         <img src="../../../img/LogoLetras.png" alt="START BANK Logo" class="logo">
-        <h1></h1>
+        <h1 id="nombreUsuario"></h1>
         <p><script>
             var fechaActual = new Date(Date.now());
             document.write(fechaActual.getDate() + '/' + (fechaActual.getMonth() + 1) + '/' + fechaActual.getFullYear());
         </script></p>
+        
     </header>
+    <h2 class="SubHeader">Historial de movimientos</h2>
 
     <div class="contenedor">
-        <h2>Pago</h2>
-        <p id="tipo"></p>
-        <img src="" alt="imagenServicio" id="imagenServicio" class="imagenServicio">
-        <p>TITULAR DE LA CUENTA:</p>
-        <h2 id="nombreUsuario">.</h2>
-        <p>Monto a pagar:</p>
-        <h2 id="monto"></h2>
+        <div class="headCon">
+            <h2>Concepto</h2>
+            <h2>Monto</h2>
+            <h2>Fecha</h2>
+        </div>
     </div>
+    
+
+
 
     <footer>
         <button class="exit-btn" id="back-btn">Regresar</button>
-        <button class="exit-btn" id="pagar">Pagar</button>
         <button class="exit-btn" id="exit-btn">Volver al menú</button>
     </footer>
 
-    <script src="./confirmarCreditos.js"></script>
-
+    <script src="./movimientos_script.js"></script>
 </body>
 </html>

@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Asignar los montos a los elementos HTML
     document.getElementById('monto-minimo').textContent = `$${montoMinimo}`;
     document.getElementById('monto-intereses').textContent = `$${montoIntereses}`;
+
     
 });
 
@@ -69,6 +70,45 @@ document.getElementById('pagar-minimo').addEventListener('click', async function
             const datos = await respuesta.json();
             localStorage.setItem('usuarioDatos', JSON.stringify(datos.result[0]));
 
+
+            let monto = montoMinimo;
+            const concepto = `Tarjeta de Credito - Pago Minimo`
+ 
+            var fechaU = new Date();
+            var hora = fechaU.getHours();
+            var minutos = fechaU.getMinutes();
+            var dia = fechaU.getDate();
+            var mes = fechaU.getMonth() + 1;
+            var anio = fechaU.getFullYear();
+            if (hora < 10) {
+                hora = '0' + hora;
+            }
+            if (minutos < 10) {
+                minutos = '0' + minutos;
+            }
+            if (dia < 10) {
+                dia = '0' + dia;
+            }
+            if (mes < 10) {
+                mes = '0' + mes;
+            }
+            var fecha = hora + ':' + minutos + ' ' + dia + '/' + mes + '/' + anio;
+
+            const idUser = usuarioDatos.id;
+
+            const respuestaMov = await fetch('/MovimientosCuenta', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ idUser, concepto, monto, fecha}),
+            });
+            const datosMov = await respuestaMov.json();
+
+
+
+            
+
             window.location.href = '../menu_pagos.html';
         } else {
             alert('No se pudo realizar el depósito. Por favor, inténtelo de nuevo.');
@@ -119,6 +159,43 @@ document.getElementById('pagar-intereses').addEventListener('click', async funct
             localStorage.setItem('usuarioDatos', JSON.stringify(datos.result[0]));
 
 
+                        
+            let monto = montoIntereses;
+            const concepto = `Tarjeta de Credito - Pago para no generar intereses`
+ 
+            var fechaU = new Date();
+            var hora = fechaU.getHours();
+            var minutos = fechaU.getMinutes();
+            var dia = fechaU.getDate();
+            var mes = fechaU.getMonth() + 1;
+            var anio = fechaU.getFullYear();
+            if (hora < 10) {
+                hora = '0' + hora;
+            }
+            if (minutos < 10) {
+                minutos = '0' + minutos;
+            }
+            if (dia < 10) {
+                dia = '0' + dia;
+            }
+            if (mes < 10) {
+                mes = '0' + mes;
+            }
+            var fecha = hora + ':' + minutos + ' ' + dia + '/' + mes + '/' + anio;
+
+            const idUser = usuarioDatos.id;
+
+            const respuestaMov = await fetch('/MovimientosCuenta', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ idUser, concepto, monto, fecha}),
+            });
+            const datosMov = await respuestaMov.json();
+
+
+
             window.location.href = '../menu_pagos.html';
         } else {
             alert('No se pudo realizar el depósito. Por favor, inténtelo de nuevo.');
@@ -165,6 +242,41 @@ document.getElementById('pagar-total').addEventListener('click', async function(
             });
             const datos = await respuesta.json();
             localStorage.setItem('usuarioDatos', JSON.stringify(datos.result[0]));
+
+
+            const concepto = `Tarjeta de Credito - Pago Total`
+ 
+            var fechaU = new Date();
+            var hora = fechaU.getHours();
+            var minutos = fechaU.getMinutes();
+            var dia = fechaU.getDate();
+            var mes = fechaU.getMonth() + 1;
+            var anio = fechaU.getFullYear();
+            if (hora < 10) {
+                hora = '0' + hora;
+            }
+            if (minutos < 10) {
+                minutos = '0' + minutos;
+            }
+            if (dia < 10) {
+                dia = '0' + dia;
+            }
+            if (mes < 10) {
+                mes = '0' + mes;
+            }
+            var fecha = hora + ':' + minutos + ' ' + dia + '/' + mes + '/' + anio;
+
+            const idUser = usuarioDatos.id;
+
+            const respuestaMov = await fetch('/MovimientosCuenta', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ idUser, concepto, monto, fecha}),
+            });
+            const datosMov = await respuestaMov.json();
+
 
             window.location.href = '../menu_pagos.html';
         } else {

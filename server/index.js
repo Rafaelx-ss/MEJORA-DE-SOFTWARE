@@ -220,3 +220,46 @@ app.post('/realizarRetiro', async (req, res) => {
         res.status(500).json({ success: false, message: 'Error al conectar con la base de datos' });
     }
 });
+
+
+
+app.post('/MovimientosCuenta', async (req, res) => {
+    console.log(req.body);
+    
+    try {
+        await sql.connect(sqlConfig);
+        const { idUser, concepto, monto, fecha } = req.body;
+
+        // Aquí asumimos que 'monto' es un número. Debes asegurarte de que el monto sea válido y positivo.
+        const result = await sql.query`INSERT INTO Historial (idUsuario, Concepto, Monto, Fecha) VALUES (${idUser}, ${concepto}, ${monto}, ${fecha})`;
+
+        if (result.rowsAffected[0] > 0) {
+            res.json({ success: true });
+        } else {
+            // No se encontró la cuenta o no se pudo actualizar
+            res.json({ success: false, message: "No se pudo actualizar el saldo." });
+        }
+    } catch (err) {
+        console.error('Error en la base de datos:', err);
+        res.status(500).json({ success: false, message: 'Error al conectar con la base de datos' });
+    }
+});
+
+
+
+app.post('/historial', async (req, res) => {
+    try {
+        await sql.connect(sqlConfig);
+        const { idUser } = req.body;
+        const result = await sql.query`SELECT * FROM Historial WHERE idUsuario = ${idUser}`;
+        
+        if (result.recordset.length > 0) {
+            res.send({ exists: true, result: result.recordset });
+        } else {
+            res.send({ exists: false });
+        }
+    } catch (err) {
+        console.error('Error en la base de datos:', err);
+        res.status(500).send('Error al conectar con la base de datos');
+    }
+});

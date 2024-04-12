@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Leer los datos del usuario guardados
     const usuarioDatos = JSON.parse(localStorage.getItem('usuarioDatos'));
-
-    // Ejemplo: Actualizar el DOM con el nombre del usuario
-    // Asegúrate de tener un elemento con id='nombreUsuario' en tu HTML
     document.getElementById('account-owner').textContent = `${usuarioDatos.nombres} ${usuarioDatos.apellidoPaterno} ${usuarioDatos.apellidoMaterno}`;
     document.getElementById('account-number').textContent = `${usuarioDatos.tarjetaDebito}`;
     document.getElementById('montocuenta').textContent = `$${usuarioDatos.saldoTarjetaDebito}`;
@@ -12,12 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (usuarioDatos.saldoTarjetaDebito > 9000) {
         document.getElementById('maxMonto').textContent = `9000`;
     }else{
-        var billetes20 = Math.floor(usuarioDatos.saldoTarjetaDebito / 20);
-        var valor = billetes20 * 20;
+        var billetes20 = Math.floor(usuarioDatos.saldoTarjetaDebito / 50);
+        var valor = billetes20 * 50;
         document.getElementById('maxMonto').textContent = `${valor}`;
     }
-
-    
 });
 
 
@@ -27,32 +22,36 @@ document.getElementById('continue-btn').addEventListener('click', async function
     e.preventDefault();
 
     var monto = document.getElementById('amount').value;
-    var billetes20 = Math.floor(usuarioDatos.saldoTarjetaDebito / 20);
-    var valor = billetes20 * 20;
+    var billetes20 = Math.floor(usuarioDatos.saldoTarjetaDebito / 50);
+    var valor = billetes20 * 50;
     // Convertir monto a número y verificar si es válido
     if (monto && esMontoValido(Number(monto))) {
 
-        if (usuarioDatos.saldoTarjetaDebito > 9000 && monto <= 9000) {
+        if (monto > 9000) {
+            alert('No se puede retirar mas de $9,000.');
+        }
+        else if (usuarioDatos.saldoTarjetaDebito > 9000 && monto <= 9000) {
             localStorage.setItem('transaccion', JSON.stringify({ monto }));
             window.location.href = './confirmar.html';
             
         }else if (monto <= valor){
                 localStorage.setItem('transaccion', JSON.stringify({ monto }));
                 window.location.href = './confirmar.html'; 
-            }
-            else{
-                alert('El monto ingresado no es válido.');
-            }
+        }
+        else{
+            alert('El monto ingresado no es válido.');
+        }
         }
     else if (!esMontoValido(Number(monto))) {
-        alert('El monto ingresado no es válido. Por favor, ingrese un monto que pueda ser compuesto por billetes de 20, 50, 100, 200, 500, o 1000.');
+        alert('El monto ingresado no es válido. Por favor, ingrese un monto que pueda ser compuesto por billetes de 50, 100, 200, 500, o 1000.');
     } else {
         alert('Por favor, complete todos los campos antes de continuar.');
     }
 });
 
 function esMontoValido(monto) {
-    const denominaciones = [1000, 500, 200, 100, 50, 20];
+
+    const denominaciones = [1000, 500, 200, 100, 50];
     for (let i = 0; i < denominaciones.length; i++) {
         const denominacion = denominaciones[i];
         if (monto >= denominacion) {

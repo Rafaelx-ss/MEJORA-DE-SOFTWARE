@@ -24,6 +24,15 @@ document.getElementById('creditos').addEventListener('click',function() {
 });
 
 document.getElementById('tarjeta-credito').addEventListener('click', function() {
+
+    const usuarioDatos = JSON.parse(localStorage.getItem('usuarioDatos'));
+    if (usuarioDatos.saldoTarjetaCredito == 0) {
+        alert("No tiene adeudo disponible.")
+        window.location.reload();
+        return;
+        
+    }
+
     window.location.href = './tarjetaCredito/tarjetaCredito.html'
 });
 

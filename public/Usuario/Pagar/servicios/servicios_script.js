@@ -16,6 +16,16 @@ document.getElementById('exit-btn').addEventListener('click', function(){
 
 
 document.getElementById('cfe').addEventListener('click', function(){
+
+    const usuarioDatos = JSON.parse(localStorage.getItem('usuarioDatos'));
+    if (usuarioDatos.pagoCFE == 0) {
+        alert("No tiene adeudo disponible.")
+        window.location.reload();
+        return;
+        
+    }
+
+
     let optionServicio = 'cfe';
 
     localStorage.setItem('optionServicio', JSON.stringify({ optionServicio }));
@@ -24,6 +34,15 @@ document.getElementById('cfe').addEventListener('click', function(){
 });
 
 document.getElementById('telmex').addEventListener('click', function(){
+
+    const usuarioDatos = JSON.parse(localStorage.getItem('usuarioDatos'));
+    if (usuarioDatos.pagoTelmex == 0) {
+        alert("No tiene adeudo disponible.")
+        window.location.reload();
+        return;
+        
+    }
+
     let optionServicio = 'telmex';
 
     localStorage.setItem('optionServicio', JSON.stringify({ optionServicio }));
@@ -33,6 +52,15 @@ document.getElementById('telmex').addEventListener('click', function(){
 
 
 document.getElementById('japay').addEventListener('click', function(){
+
+    const usuarioDatos = JSON.parse(localStorage.getItem('usuarioDatos'));
+    if (usuarioDatos.pagoJapay == 0) {
+        alert("No tiene adeudo disponible.")
+        window.location.reload();
+        return;
+        
+    }
+
     let optionServicio = 'japay';
 
     localStorage.setItem('optionServicio', JSON.stringify({ optionServicio }));
@@ -42,6 +70,16 @@ document.getElementById('japay').addEventListener('click', function(){
 
 
 document.getElementById('totalplay').addEventListener('click', function(){
+
+    const usuarioDatos = JSON.parse(localStorage.getItem('usuarioDatos'));
+    if (usuarioDatos.pagoTotalPlay == 0) {
+        alert("No tiene adeudo disponible.")
+        window.location.reload();
+        return;
+        
+    }
+
+
     let optionServicio = 'totalplay';
 
     localStorage.setItem('optionServicio', JSON.stringify({ optionServicio }));
@@ -50,6 +88,15 @@ document.getElementById('totalplay').addEventListener('click', function(){
 });
 
 document.getElementById('telcel').addEventListener('click', function(){
+
+    const usuarioDatos = JSON.parse(localStorage.getItem('usuarioDatos'));
+    if (usuarioDatos.pagoTelcel == 0) {
+        alert("No tiene adeudo disponible.")
+        window.location.reload();
+        return;
+        
+    }
+
     let optionServicio = 'telcel';
 
     localStorage.setItem('optionServicio', JSON.stringify({ optionServicio }));

@@ -127,7 +127,7 @@ footer {
     font-size: large;
     background-color: #00162D;
     color: white;
-    padding: 1em 4em;
+    padding: .8em 1.5em;
     border: none;
     border-radius: .5em;
     cursor: pointer;
@@ -154,8 +154,8 @@ footer {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-top: -70px;
-    width: 30%;
-    height: 55%;
+    width: 42%;
+    height: 80%;
 }
 
 .imagenServicio{

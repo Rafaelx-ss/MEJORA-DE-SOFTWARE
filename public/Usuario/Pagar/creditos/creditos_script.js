@@ -16,6 +16,15 @@ document.getElementById('exit-btn').addEventListener('click', function(){
 
 
 document.getElementById('casa').addEventListener('click', function(){
+
+    const usuarioDatos = JSON.parse(localStorage.getItem('usuarioDatos'));
+    if (usuarioDatos.pagoHipotecario == 0) {
+        alert("No tiene adeudo disponible.")
+        window.location.reload();
+        return;
+        
+    }
+
     let optionServicio = 'casa';
 
     localStorage.setItem('optionServicio', JSON.stringify({ optionServicio }));
@@ -24,6 +33,15 @@ document.getElementById('casa').addEventListener('click', function(){
 });
 
 document.getElementById('carro').addEventListener('click', function(){
+
+    const usuarioDatos = JSON.parse(localStorage.getItem('usuarioDatos'));
+    if (usuarioDatos.pagoCarro == 0) {
+        alert("No tiene adeudo disponible.")
+        window.location.reload();
+        return;
+        
+    }
+
     let optionServicio = 'carro';
 
     localStorage.setItem('optionServicio', JSON.stringify({ optionServicio }));
@@ -33,6 +51,15 @@ document.getElementById('carro').addEventListener('click', function(){
 
 
 document.getElementById('colegiatura').addEventListener('click', function(){
+
+    const usuarioDatos = JSON.parse(localStorage.getItem('usuarioDatos'));
+    if (usuarioDatos.pagoColegiatura == 0) {
+        alert("No tiene adeudo disponible.")
+        window.location.reload();
+        return;
+        
+    }
+
     let optionServicio = 'colegiatura';
 
     localStorage.setItem('optionServicio', JSON.stringify({ optionServicio }));

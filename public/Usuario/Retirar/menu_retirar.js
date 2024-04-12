@@ -16,7 +16,7 @@ document.getElementById('exit-btn').addEventListener('click', function() {
 
 
 document.getElementById('movimientos').addEventListener('click', function() {
-    window.location.href = '../menu_principal.html';
+    window.location.href = './Movimientos/movimientos.html';
 });
 
 document.getElementById('retirar-efectivo').addEventListener('click', function() {
