@@ -27,7 +27,7 @@ header h1{
 
 .logo {
     margin-top: -20px;
-    width: 10em; /* Ajustar si es necesario para pantallas más pequeñas */
+    width: 10em; 
 }
 
 main {
@@ -45,7 +45,7 @@ main h2 {
 
 .options {
     display: flex;
-    flex-wrap: wrap; /* Añadido para permitir que las opciones se ajusten según el ancho de la pantalla */
+    flex-wrap: wrap;
     justify-content: space-around;
     margin-top: 2em;
 }
@@ -57,14 +57,14 @@ main h2 {
     border-radius: .5em;
     padding: .9em;
     border: 0;
-    align-items: center; /* Corregido de 'end' a 'center' */
+    align-items: center;
     transition: background-color 0.3s;
     cursor: pointer;
 }
 
 .icon {
     height: auto;
-    width: 50%; /* Ajustado para responsividad */
+    width: 50%; 
 }
 
 .option p, .option h3 {
@@ -84,7 +84,7 @@ main h2 {
 }
 
 footer {
-    margin-top: auto; /* Ajustado para colocar el footer en la parte inferior */
+    margin-top: auto;
     padding: 2em 0;
     text-align: center;
 }
@@ -111,14 +111,14 @@ footer {
     background-color: #003366;
 }
 
-/* Media query para pantallas más pequeñas */
+
 @media (max-width: 768px) {
     header, .options, footer {
         flex-direction: column;
     }
 
     .logo, .icon {
-        width: 60%; /* Ajuste el tamaño según sea necesario */
+        width: 60%; 
     }
 
     .option {

@@ -46,7 +46,7 @@ header h1{
 
 .logo {
     margin-top: -20px;
-    width: 10em; /* Ajustar si es necesario para pantallas más pequeñas */
+    width: 10em; 
 }
 
 .menu-pagos {
@@ -68,7 +68,7 @@ header h1{
     padding: .9em;
     margin: 1.5em;
     border: 0;
-    align-items: center; /* Corregido de 'end' a 'center' */
+    align-items: center;
     transition: background-color 0.3s;
     cursor: pointer;
 }
