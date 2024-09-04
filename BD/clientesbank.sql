@@ -1,0 +1,142 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 04-09-2024 a las 05:05:42
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `clientesbank`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `atmefectivo`
+--
+
+CREATE TABLE `atmefectivo` (
+  `efectivoDisponible` decimal(18,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `atmefectivo`
+--
+
+INSERT INTO `atmefectivo` (`efectivoDisponible`) VALUES
+(300000.00);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clientescuenta`
+--
+
+CREATE TABLE `clientescuenta` (
+  `id` int(11) NOT NULL,
+  `nombres` varchar(50) NOT NULL,
+  `apellidoPaterno` varchar(50) DEFAULT NULL,
+  `apellidoMaterno` varchar(50) DEFAULT NULL,
+  `tarjetaDebito` decimal(16,0) NOT NULL,
+  `tarjetaCredito` decimal(16,0) NOT NULL,
+  `pinTarjeta` int(11) NOT NULL,
+  `saldoTarjetaDebito` decimal(18,2) DEFAULT NULL,
+  `saldoTarjetaCredito` decimal(18,2) DEFAULT NULL,
+  `pagoHipotecario` decimal(18,2) DEFAULT NULL,
+  `pagoCarro` decimal(18,2) DEFAULT NULL,
+  `pagoCFE` decimal(18,2) DEFAULT NULL,
+  `pagoTelmex` decimal(18,2) DEFAULT NULL,
+  `pagoJapay` decimal(18,2) DEFAULT NULL,
+  `pagoTelcel` decimal(18,2) DEFAULT NULL,
+  `pagoTotalPlay` decimal(18,2) DEFAULT NULL,
+  `pagoColegiatura` decimal(18,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `clientescuenta`
+--
+
+INSERT INTO `clientescuenta` (`id`, `nombres`, `apellidoPaterno`, `apellidoMaterno`, `tarjetaDebito`, `tarjetaCredito`, `pinTarjeta`, `saldoTarjetaDebito`, `saldoTarjetaCredito`, `pagoHipotecario`, `pagoCarro`, `pagoCFE`, `pagoTelmex`, `pagoJapay`, `pagoTelcel`, `pagoTotalPlay`, `pagoColegiatura`) VALUES
+(1, 'Mario Rafael', 'Solis', 'Suarez', 5786709677231470, 5662044162468873, 1206, 17570.09, 3782.42, 5000.00, 7000.00, 350.00, 520.00, 200.00, 350.00, 750.00, 3700.00),
+(2, 'KEVIN ENMANUEL', 'PADILLA', 'VALDEZ', 5752012256582762, 5708988521981451, 3185, 13185.19, 2450.92, 4000.00, 5000.00, 199.00, 450.00, 150.00, 500.00, 800.00, 1200.00),
+(3, 'SAIDY ASURY', 'RODRIGUEZ', 'OSORIO', 5722171528569223, 5852996984757313, 8505, 9842.59, 2282.57, 9000.00, 4000.00, 50.00, 250.00, 300.00, 350.00, 950.00, 3700.00),
+(4, 'HECTOR ENRIQUE', 'MENDOZA', 'NAVA', 5585534185761346, 5522937451145280, 1141, 29572.99, 1182.42, 10000.00, 10000.00, 950.00, 220.00, 300.00, 450.00, 1454.00, 3700.00),
+(5, 'RODRIGO DE LA CRUZ', 'GONZALEZ', 'MONTERO', 5572136128787799, 5985386257013773, 4486, 1122.89, 0.00, 0.00, 0.00, 150.00, 50.00, 100.00, 90.00, 250.00, 3700.00),
+(6, 'ALEJANDRO', 'MAGANA', 'LOPEZ', 5716747958312739, 5772083936392807, 4158, 11091.89, 3782.42, 5000.00, 7000.00, 350.00, 520.00, 200.00, 453.00, 124.00, 3700.00),
+(7, 'JOSE ARIEL', 'MARTINEZ', 'LLANES', 5912219448252724, 5963524266212978, 6495, 28000.00, 1882.42, 812.00, 4000.00, 455.00, 520.00, 200.00, 1235.00, 550.00, 3700.00),
+(8, 'BRANDON ISAI', 'JIMENEZ', 'HAU', 5871410557766564, 5805541990302946, 1684, 48115.56, 4565.42, 1505.00, 3000.00, 455.00, 520.00, 200.00, 250.00, 680.00, 3700.00),
+(9, 'ALEXIS YHAIR', 'GUEMEZ', 'MONTALVO', 5923175728438364, 5973538923459994, 9638, 15115.59, 4645.42, 5744.00, 687.00, 90.00, 520.00, 200.00, 350.00, 453.00, 3700.00),
+(10, 'JOSE ANTONIO DE JESUS', 'POOL', 'KU', 5786708914231470, 5651646172792955, 2936, 8984.01, 2282.57, 4532.00, 4500.00, 155.00, 520.00, 150.00, 90.00, 950.00, 3700.00),
+(11, 'ALEXIS ALEXANDER', 'BOLIO', 'CHAN', 5923175728438364, 5651646131852955, 2132, 44615.56, 7545.42, 4532.00, 4500.00, 155.00, 450.00, 200.00, 350.00, 1454.00, 1200.00),
+(12, 'JOSE ARTURO', 'CABRERA', 'ARCOS', 5786709254919470, 5651346172792999, 3210, 11191.89, 2450.92, 9000.00, 3000.00, 90.00, 450.00, 200.00, 452.00, 1454.00, 3700.00),
+(13, 'EDSON DANIEL', 'CHAVEZ', 'MERITO', 5786709712218505, 5651346172911979, 4853, 4844.01, 7545.99, 3532.00, 4500.00, 199.00, 220.00, 300.00, 350.00, 450.00, 3700.00),
+(14, 'JOSUE ISMAEL', 'SANCHEZ', 'PUC', 5786709212231470, 5651346192792955, 2836, 48115.56, 2450.92, 5532.00, 2500.00, 50.00, 450.00, 150.00, 452.00, 450.00, 1200.00),
+(15, 'CRISTIAN ISAAC', 'LLANES', 'PUC', 5786709629361499, 5651346172992056, 2930, 10542.59, 2282.57, 812.00, 4500.00, 90.00, 520.00, 300.00, 452.00, 450.00, 3700.00),
+(16, 'MIGUEL ANGEL', 'CANTO', 'POOT', 5786709677231471, 5651346293692966, 3425, 11091.89, 7545.42, 10000.00, 5200.00, 199.00, 450.00, 200.00, 90.00, 950.00, 1200.00),
+(17, 'MARICARMEN', 'ESCALANTE', 'AGUILAR', 5786709677231271, 5651346971192932, 2948, 8000.01, 2450.92, 812.00, 6000.00, 155.00, 220.00, 150.00, 350.00, 450.00, 3700.00),
+(18, 'LUIS GERARDO', 'DIAZ', 'PARDENILLA', 5786709549131672, 5651346172792983, 2958, 8884.01, 7595.42, 5532.00, 7500.00, 199.00, 520.00, 150.00, 452.00, 450.00, 3700.00),
+(19, 'RAUL ALEJANDRO', 'DONDE', 'PEREZ', 5786709677231573, 5651346172792967, 3210, 13491.89, 7545.42, 812.00, 3000.00, 155.00, 450.00, 300.00, 90.00, 950.00, 1200.00),
+(20, 'JORGE ABRAHAAM', 'CRUZ', 'PECH', 5786709596831454, 5651346172792954, 2978, 9842.59, 1182.42, 10000.00, 5200.00, 90.00, 520.00, 200.00, 452.00, 450.00, 3700.00);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `historial`
+--
+
+CREATE TABLE `historial` (
+  `id` int(11) NOT NULL,
+  `idUsuario` int(11) DEFAULT NULL,
+  `Concepto` varchar(255) DEFAULT NULL,
+  `Monto` decimal(18,2) DEFAULT NULL,
+  `Fecha` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `clientescuenta`
+--
+ALTER TABLE `clientescuenta`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `historial`
+--
+ALTER TABLE `historial`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `clientescuenta`
+--
+ALTER TABLE `clientescuenta`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT de la tabla `historial`
+--
+ALTER TABLE `historial`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
