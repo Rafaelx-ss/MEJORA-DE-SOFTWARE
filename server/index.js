@@ -10,7 +10,7 @@ app.use(express.static('public'));
 
 const sqlConfig = {
     database: 'clientesBank',
-    server: 'DESKTOP-0R5MCC8',
+    server: 'DESKTOP-J6HVQSS',
     driver: 'msnodesqlv8',
     options: {
         trustedConnection: true
