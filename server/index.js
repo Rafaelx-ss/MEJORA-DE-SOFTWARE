@@ -1,5 +1,5 @@
 const express = require('express');
-const sql = require('mssql/msnodesqlv8');
+const mysql = require('mysql2/promise');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -8,239 +8,228 @@ const port = 3000;
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+// Configuración de la conexión a MySQL
 const sqlConfig = {
-    database: 'clientesBank',
-    server: 'DESKTOP-J6HVQSS',
-    driver: 'msnodesqlv8',
-    options: {
-        trustedConnection: true
-    }sqlConfig
+    host: 'localhost',
+    user: 'solisrafael895@gmail.com', 
+    password: '0612', 
+    database: 'clientesBank'
 };
 
+// Función para obtener la conexión a la base de datos
+async function getConnection() {
+    return await mysql.createConnection(sqlConfig);
+}
 
+// Endpoint: Verificar usuario
 app.post('/verifyUser', async (req, res) => {
     try {
-        await sql.connect(sqlConfig);
+        const connection = await getConnection();
         const { tarjetaDebito } = req.body;
-        const result = await sql.query`SELECT * FROM clientesCuenta WHERE tarjetaDebito = ${tarjetaDebito}`;
-        
-        if (result.recordset.length > 0) {
-            res.send({ exists: true, result: result.recordset });
+        const [rows] = await connection.execute('SELECT * FROM clientesCuenta WHERE tarjetaDebito = ?', [tarjetaDebito]);
+
+        if (rows.length > 0) {
+            res.send({ exists: true, result: rows });
         } else {
             res.send({ exists: false });
         }
+        await connection.end();
     } catch (err) {
         console.error('Error en la base de datos:', err);
         res.status(500).send('Error al conectar con la base de datos');
     }
 });
 
-app.listen(port, () => {
-    console.log(`Servidor ejecutándose en http://localhost:${port}`);
-});
-
-
+// Endpoint: Realizar depósito
 app.post('/realizarDeposito', async (req, res) => {
-    console.log(req.body);
-    
     try {
-        await sql.connect(sqlConfig);
+        const connection = await getConnection();
         const { tarjetaDebito, monto } = req.body;
 
-        const result = await sql.query`UPDATE clientesCuenta SET saldoTarjetaDebito = saldoTarjetaDebito + ${monto} WHERE tarjetaDebito = ${tarjetaDebito}`;
+        const [result] = await connection.execute('UPDATE clientesCuenta SET saldoTarjetaDebito = saldoTarjetaDebito + ? WHERE tarjetaDebito = ?', [monto, tarjetaDebito]);
 
-        if (result.rowsAffected[0] > 0) {
+        if (result.affectedRows > 0) {
             res.json({ success: true });
         } else {
             res.json({ success: false, message: "No se pudo actualizar el saldo." });
         }
+        await connection.end();
     } catch (err) {
         console.error('Error en la base de datos:', err);
         res.status(500).json({ success: false, message: 'Error al conectar con la base de datos' });
     }
 });
 
-
+// Endpoint: Realizar pago mínimo
 app.post('/realizarPagoMinimo', async (req, res) => {
     try {
-        console.log('Body de la solicitud:', req.body); 
-        await sql.connect(sqlConfig);
-        let { tarjetaDebito, montoMinimo } = req.body;
+        const connection = await getConnection();
+        const { tarjetaDebito, montoMinimo } = req.body;
 
-        let result = await sql.query`UPDATE clientesCuenta SET saldoTarjetaCredito = saldoTarjetaCredito - ${montoMinimo} WHERE tarjetaDebito = ${tarjetaDebito}`;
+        const [result] = await connection.execute('UPDATE clientesCuenta SET saldoTarjetaCredito = saldoTarjetaCredito - ? WHERE tarjetaDebito = ?', [montoMinimo, tarjetaDebito]);
 
-
-        if (result.rowsAffected[0] > 0) {
+        if (result.affectedRows > 0) {
             res.json({ success: true });
         } else {
             res.json({ success: false, message: "No se pudo actualizar el saldo." });
         }
+        await connection.end();
     } catch (err) {
-        console.error('Error en el servidor:', err); 
+        console.error('Error en la base de datos:', err);
         res.status(500).json({ success: false, message: 'Error al conectar con la base de datos' });
     }
 });
 
-
-app.post('/realizarPagoIntereses', async (req, res) => {
-    try {
-        console.log('Body de la solicitud:', req.body);
-        await sql.connect(sqlConfig);
-        let { tarjetaDebito, montoIntereses } = req.body;
-
-        let result = await sql.query`UPDATE clientesCuenta SET saldoTarjetaCredito = saldoTarjetaCredito - ${montoIntereses} WHERE tarjetaDebito = ${tarjetaDebito}`;
-
-
-        if (result.rowsAffected[0] > 0) {
-            res.json({ success: true });
-        } else {
-            res.json({ success: false, message: "No se pudo actualizar el saldo." });
-        }
-    } catch (err) {
-        console.error('Error en el servidor:', err); 
-        res.status(500).json({ success: false, message: 'Error al conectar con la base de datos' });
-    }
-});
-
-
+// Endpoint: Realizar pago total
 app.post('/realizarPagoTotal', async (req, res) => {
     try {
-        console.log('Body de la solicitud:', req.body);
-        await sql.connect(sqlConfig);
+        const connection = await getConnection();
         const { tarjetaDebito } = req.body;
 
-        let result = await sql.query`UPDATE clientesCuenta SET saldoTarjetaCredito = 0 WHERE tarjetaDebito = ${tarjetaDebito}`;
+        const [result] = await connection.execute('UPDATE clientesCuenta SET saldoTarjetaCredito = 0 WHERE tarjetaDebito = ?', [tarjetaDebito]);
 
-
-        if (result.rowsAffected[0] > 0) {
+        if (result.affectedRows > 0) {
             res.json({ success: true });
         } else {
             res.json({ success: false, message: "No se pudo actualizar el saldo." });
         }
+        await connection.end();
     } catch (err) {
-        console.error('Error en el servidor:', err);
+        console.error('Error en la base de datos:', err);
         res.status(500).json({ success: false, message: 'Error al conectar con la base de datos' });
     }
 });
 
-
+// Endpoint: Cambiar NIP
 app.post('/cambiarNip', async (req, res) => {
     try {
-        console.log('Body de la solicitud:', req.body);
-        await sql.connect(sqlConfig);
+        const connection = await getConnection();
         const { nipValue, tarjetaDebito } = req.body;
 
-        let result = await sql.query`UPDATE clientesCuenta SET pinTarjeta = ${nipValue} WHERE tarjetaDebito = ${tarjetaDebito}`;
+        const [result] = await connection.execute('UPDATE clientesCuenta SET pinTarjeta = ? WHERE tarjetaDebito = ?', [nipValue, tarjetaDebito]);
 
-
-        if (result.rowsAffected[0] > 0) {
+        if (result.affectedRows > 0) {
             res.json({ success: true });
         } else {
-            res.json({ success: false, message: "No se pudo actualizar el saldo." });
+            res.json({ success: false, message: "No se pudo actualizar el NIP." });
         }
+        await connection.end();
     } catch (err) {
-        console.error('Error en el servidor:', err);
+        console.error('Error en la base de datos:', err);
         res.status(500).json({ success: false, message: 'Error al conectar con la base de datos' });
     }
 });
 
-
+// Endpoint: Realizar retiro
 app.post('/realizarRetiro', async (req, res) => {
-    console.log(req.body);
-    
     try {
-        await sql.connect(sqlConfig);
+        const connection = await getConnection();
         const { tarjetaDebito, monto } = req.body;
 
-        const result = await sql.query`UPDATE clientesCuenta SET saldoTarjetaDebito = saldoTarjetaDebito - ${monto} WHERE tarjetaDebito = ${tarjetaDebito}`;
+        const [result] = await connection.execute('UPDATE clientesCuenta SET saldoTarjetaDebito = saldoTarjetaDebito - ? WHERE tarjetaDebito = ?', [monto, tarjetaDebito]);
 
-        if (result.rowsAffected[0] > 0) {
+        if (result.affectedRows > 0) {
             res.json({ success: true });
         } else {
             res.json({ success: false, message: "No se pudo actualizar el saldo." });
         }
+        await connection.end();
     } catch (err) {
         console.error('Error en la base de datos:', err);
         res.status(500).json({ success: false, message: 'Error al conectar con la base de datos' });
     }
 });
 
-
-
+// Endpoint: Registrar movimientos en la cuenta
 app.post('/MovimientosCuenta', async (req, res) => {
-    console.log(req.body);
-    
     try {
-        await sql.connect(sqlConfig);
+        const connection = await getConnection();
         const { idUser, concepto, monto, fecha } = req.body;
 
-        const result = await sql.query`INSERT INTO Historial (idUsuario, Concepto, Monto, Fecha) VALUES (${idUser}, ${concepto}, ${monto}, ${fecha})`;
+        const [result] = await connection.execute('INSERT INTO Historial (idUsuario, Concepto, Monto, Fecha) VALUES (?, ?, ?, ?)', [idUser, concepto, monto, fecha]);
 
-        if (result.rowsAffected[0] > 0) {
+        if (result.affectedRows > 0) {
             res.json({ success: true });
         } else {
-            res.json({ success: false, message: "No se pudo actualizar el saldo." });
+            res.json({ success: false, message: "No se pudo registrar el movimiento." });
         }
+        await connection.end();
     } catch (err) {
         console.error('Error en la base de datos:', err);
         res.status(500).json({ success: false, message: 'Error al conectar con la base de datos' });
     }
 });
 
-
-
+// Endpoint: Obtener historial
 app.post('/historial', async (req, res) => {
     try {
-        await sql.connect(sqlConfig);
+        const connection = await getConnection();
         const { idUser } = req.body;
-        const result = await sql.query`SELECT * FROM Historial WHERE idUsuario = ${idUser}`;
-        
-        if (result.recordset.length > 0) {
-            res.send({ exists: true, result: result.recordset });
+        const [rows] = await connection.execute('SELECT * FROM Historial WHERE idUsuario = ?', [idUser]);
+
+        if (rows.length > 0) {
+            res.send({ exists: true, result: rows });
         } else {
             res.send({ exists: false });
         }
+        await connection.end();
     } catch (err) {
         console.error('Error en la base de datos:', err);
         res.status(500).send('Error al conectar con la base de datos');
     }
 });
 
-
+// Endpoint: Realizar pago de servicio
 app.post('/realizarPagoServicio', async (req, res) => {
     try {
-        console.log('Body de la solicitud:', req.body);
-        await sql.connect(sqlConfig);
-        const { optionPagoServicio, tarjetaDebito, monto } = req.body;
+        const connection = await getConnection();
+        const { optionPagoServicio, tarjetaDebito } = req.body;
 
-        let result;
-
-        if (optionPagoServicio == "pagoCFE") {
-            result = await sql.query`UPDATE clientesCuenta SET pagoCFE = 0 WHERE tarjetaDebito = ${tarjetaDebito}`;
-        } else if (optionPagoServicio == "pagoTelmex") {
-            result = await sql.query`UPDATE clientesCuenta SET pagoTelmex = 0 WHERE tarjetaDebito = ${tarjetaDebito}`;
-        } else if (optionPagoServicio == "pagoJapay"){
-            result = await sql.query`UPDATE clientesCuenta SET pagoJapay = 0 WHERE tarjetaDebito = ${tarjetaDebito}`;  
-        } else if (optionPagoServicio == "pagoTelcel") {
-            result = await sql.query`UPDATE clientesCuenta SET pagoTelcel = 0 WHERE tarjetaDebito = ${tarjetaDebito}`;
-        } else if (optionPagoServicio == "pagoTotalPlay"){
-            result = await sql.query`UPDATE clientesCuenta SET pagoTotalPlay = 0 WHERE tarjetaDebito = ${tarjetaDebito}`;
-        } else if (optionPagoServicio == "pagoHipotecario"){
-            result = await sql.query`UPDATE clientesCuenta SET pagoHipotecario = 0 WHERE tarjetaDebito = ${tarjetaDebito}`;
-        } else if (optionPagoServicio == "pagoCarro"){
-            result = await sql.query`UPDATE clientesCuenta SET pagoCarro = 0 WHERE tarjetaDebito = ${tarjetaDebito}`;
-        } else if (optionPagoServicio == "pagoColegiatura"){
-            result = await sql.query`UPDATE clientesCuenta SET pagoColegiatura = 0 WHERE tarjetaDebito = ${tarjetaDebito}`;
+        let query;
+        switch (optionPagoServicio) {
+            case "pagoCFE":
+                query = 'UPDATE clientesCuenta SET pagoCFE = 0 WHERE tarjetaDebito = ?';
+                break;
+            case "pagoTelmex":
+                query = 'UPDATE clientesCuenta SET pagoTelmex = 0 WHERE tarjetaDebito = ?';
+                break;
+            case "pagoJapay":
+                query = 'UPDATE clientesCuenta SET pagoJapay = 0 WHERE tarjetaDebito = ?';
+                break;
+            case "pagoTelcel":
+                query = 'UPDATE clientesCuenta SET pagoTelcel = 0 WHERE tarjetaDebito = ?';
+                break;
+            case "pagoTotalPlay":
+                query = 'UPDATE clientesCuenta SET pagoTotalPlay = 0 WHERE tarjetaDebito = ?';
+                break;
+            case "pagoHipotecario":
+                query = 'UPDATE clientesCuenta SET pagoHipotecario = 0 WHERE tarjetaDebito = ?';
+                break;
+            case "pagoCarro":
+                query = 'UPDATE clientesCuenta SET pagoCarro = 0 WHERE tarjetaDebito = ?';
+                break;
+            case "pagoColegiatura":
+                query = 'UPDATE clientesCuenta SET pagoColegiatura = 0 WHERE tarjetaDebito = ?';
+                break;
+            default:
+                return res.json({ success: false, message: "Opción de pago no válida." });
         }
 
+        const [result] = await connection.execute(query, [tarjetaDebito]);
 
-        if (result.rowsAffected[0] > 0) {
+        if (result.affectedRows > 0) {
             res.json({ success: true });
         } else {
             res.json({ success: false, message: "No se pudo actualizar el saldo." });
         }
+        await connection.end();
     } catch (err) {
-        console.error('Error en el servidor:', err);
+        console.error('Error en la base de datos:', err);
         res.status(500).json({ success: false, message: 'Error al conectar con la base de datos' });
     }
+});
+
+// Iniciar el servidor
+app.listen(port, () => {
+    console.log(`Servidor ejecutándose en http://localhost:${port}`);
 });
