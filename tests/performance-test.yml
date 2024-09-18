@@ -1,0 +1,16 @@
+config:
+  target: 'http://localhost:3001'
+  phases:
+    - duration: 5
+      arrivalRate: 2 # número de usuarios concurrentes por segundo
+scenarios:
+  - flow:
+      - post:
+          url: '/realizarDeposito'
+          json:
+            tarjetaDebito: '5786709677231470'
+            monto: 500
+      - post:
+          url: '/verifyUser'
+          json:
+            tarjetaDebito: '5786709677231470'

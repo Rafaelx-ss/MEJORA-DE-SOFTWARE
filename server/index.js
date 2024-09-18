@@ -29,8 +29,8 @@ app.get('/', (req, res) => {
 // Configuración de la conexión a MySQL
 const sqlConfig = {
     host: 'localhost',
-    user: 'solisrafael895@gmail.com',
-    password: '0612',
+    user: 'kevDom',
+    password: 'Kev0317',
     database: 'clientesBank'
 };
 
