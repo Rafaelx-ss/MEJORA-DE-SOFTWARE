@@ -1,12 +1,17 @@
 const express = require('express');
 const mysql = require('mysql2/promise');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+});
 
 // Configuración de la conexión a MySQL
 const sqlConfig = {
@@ -15,6 +20,10 @@ const sqlConfig = {
     password: '0612', 
     database: 'clientesBank'
 };
+
+app.listen(port, () => {
+    console.log(`Servidor iniciado en http://localhost:${port}`);
+});
 
 // Función para obtener la conexión a la base de datos
 async function getConnection() {
@@ -229,7 +238,3 @@ app.post('/realizarPagoServicio', async (req, res) => {
     }
 });
 
-// Iniciar el servidor
-app.listen(port, () => {
-    console.log(`Servidor ejecutándose en http://localhost:${port}`);
-});
