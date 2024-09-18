@@ -1,10 +1,23 @@
-const express = require('express');
-const mysql = require('mysql2/promise');
-const bodyParser = require('body-parser');
-const path = require('path');
+import express from 'express';
+import mysql from 'mysql2/promise';
+import bodyParser from 'body-parser';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+console.log('Iniciando el servidor...');
+
+// Verificar si __filename y __dirname funcionan correctamente
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+console.log('import.meta.url:', import.meta.url);
+console.log('__filename:', __filename);
 
 const app = express();
 const port = 3001;
+
+// Verificar si el servidor se está configurando
+console.log('Configurando el servidor...');
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '..', 'public')));
@@ -16,19 +29,38 @@ app.get('/', (req, res) => {
 // Configuración de la conexión a MySQL
 const sqlConfig = {
     host: 'localhost',
-    user: 'solisrafael895@gmail.com', 
-    password: '0612', 
+    user: 'solisrafael895@gmail.com',
+    password: '0612',
     database: 'clientesBank'
 };
 
-app.listen(port, () => {
-    console.log(`Servidor iniciado en http://localhost:${port}`);
-});
-
 // Función para obtener la conexión a la base de datos
-async function getConnection() {
+export async function getConnection() {
     return await mysql.createConnection(sqlConfig);
 }
+
+// Nueva función realizarDeposito que recibe una conexión como argumento
+export async function realizarDeposito(connection, tarjetaDebito, monto) {
+    const [result] = await connection.execute(
+        'UPDATE clientesCuenta SET saldoTarjetaDebito = saldoTarjetaDebito + ? WHERE tarjetaDebito = ?', 
+        [monto, tarjetaDebito]
+    );
+
+    return { success: result.affectedRows > 0 };
+}
+
+// Iniciar el servidor solo si el archivo se ejecuta directamente
+if (process.argv[1] === __filename) {
+    app.listen(port, () => {
+        console.log(`Servidor iniciado en http://localhost:${port}`);
+    }).on('error', (err) => {
+        console.error('Error al iniciar el servidor:', err);
+    });
+}
+
+export default app;
+
+
 
 // Endpoint: Verificar usuario
 app.post('/verifyUser', async (req, res) => {
@@ -49,25 +81,28 @@ app.post('/verifyUser', async (req, res) => {
     }
 });
 
+
 // Endpoint: Realizar depósito
 app.post('/realizarDeposito', async (req, res) => {
     try {
         const connection = await getConnection();
         const { tarjetaDebito, monto } = req.body;
 
-        const [result] = await connection.execute('UPDATE clientesCuenta SET saldoTarjetaDebito = saldoTarjetaDebito + ? WHERE tarjetaDebito = ?', [monto, tarjetaDebito]);
+        const response = await realizarDeposito(connection, tarjetaDebito, monto);
 
-        if (result.affectedRows > 0) {
+        if (response.success) {
             res.json({ success: true });
         } else {
             res.json({ success: false, message: "No se pudo actualizar el saldo." });
         }
+
         await connection.end();
     } catch (err) {
         console.error('Error en la base de datos:', err);
         res.status(500).json({ success: false, message: 'Error al conectar con la base de datos' });
     }
 });
+
 
 // Endpoint: Realizar pago mínimo
 app.post('/realizarPagoMinimo', async (req, res) => {
@@ -237,4 +272,5 @@ app.post('/realizarPagoServicio', async (req, res) => {
         res.status(500).json({ success: false, message: 'Error al conectar con la base de datos' });
     }
 });
+
 
